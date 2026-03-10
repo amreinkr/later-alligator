@@ -1,5 +1,63 @@
 'use strict';
 
+const translations = {
+  en: {
+    tagline:      'Add time to any start time — see you later!',
+    startLabel:   'Start date & time',
+    addTimeLabel: 'Add time',
+    unitYr:       'yr',
+    unitDay:      'day',
+    unitHr:       'hr',
+    unitMin:      'min',
+    calculateBtn: 'Calculate ➜',
+    resultLabel:  'Result',
+    yearsAria:    'Years',
+    daysAria:     'Days',
+    hoursAria:    'Hours',
+    minutesAria:  'Minutes',
+  },
+  es: {
+    tagline:      '¡Agrega tiempo a cualquier hora de inicio — hasta luego!',
+    startLabel:   'Fecha y hora de inicio',
+    addTimeLabel: 'Agregar tiempo',
+    unitYr:       'año',
+    unitDay:      'día',
+    unitHr:       'hr',
+    unitMin:      'min',
+    calculateBtn: 'Calcular ➜',
+    resultLabel:  'Resultado',
+    yearsAria:    'Años',
+    daysAria:     'Días',
+    hoursAria:    'Horas',
+    minutesAria:  'Minutos',
+  },
+};
+
+function setLanguage(lang) {
+  const t = translations[lang];
+  if (!t) return;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const key = el.dataset.i18nAria;
+    if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+  });
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  document.documentElement.lang = lang;
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+});
+
 const originDateInput = document.getElementById('originDate');
 const originInput     = document.getElementById('originTime');
 const yearsInput      = document.getElementById('years');
@@ -48,6 +106,8 @@ hoursInput.addEventListener('change', () => {
 });
 
 calculateBtn.addEventListener('click', calculate);
+
+setLanguage('en');
 
 function calculate() {
   const dateVal = originDateInput.value; // "YYYY-MM-DD"
