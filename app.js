@@ -2,6 +2,7 @@
 
 const originDateInput = document.getElementById('originDate');
 const originInput     = document.getElementById('originTime');
+const daysInput       = document.getElementById('days');
 const hoursInput      = document.getElementById('hours');
 const minutesInput    = document.getElementById('minutes');
 const calculateBtn    = document.getElementById('calculateBtn');
@@ -31,6 +32,11 @@ minutesInput.addEventListener('change', () => {
   minutesInput.value = val;
 });
 
+daysInput.addEventListener('change', () => {
+  let val = parseInt(daysInput.value, 10) || 0;
+  daysInput.value = Math.max(0, val);
+});
+
 hoursInput.addEventListener('change', () => {
   let val = parseInt(hoursInput.value, 10) || 0;
   hoursInput.value = Math.max(0, val);
@@ -48,10 +54,11 @@ function calculate() {
 
   const origin = new Date(year, month - 1, day, hour, minute, 0, 0);
 
+  const addDays    = parseInt(daysInput.value, 10)    || 0;
   const addHours   = parseInt(hoursInput.value, 10)   || 0;
   const addMinutes = parseInt(minutesInput.value, 10) || 0;
 
-  const result = new Date(origin.getTime() + (addHours * 60 + addMinutes) * 60 * 1000);
+  const result = new Date(origin.getTime() + (addDays * 1440 + addHours * 60 + addMinutes) * 60 * 1000);
 
   resultTime.textContent = formatTime(result);
   resultDate.textContent = formatDate(result);
