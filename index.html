@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Later Alligator 🐊</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="card">
+    <header>
+      <span class="gator">🐊</span>
+      <h1>Later Alligator</h1>
+      <p class="tagline">Add time to any start time — see you later!</p>
+    </header>
+
+    <section class="input-group">
+      <label for="originTime">Start time</label>
+      <input type="time" id="originTime" value="12:00" />
+    </section>
+
+    <section class="input-group add-time">
+      <label>Add time</label>
+      <div class="add-time-inputs">
+        <div class="spinner-wrap">
+          <button class="spin-btn" data-target="hours" data-dir="up">▲</button>
+          <input type="number" id="hours" min="0" max="999" value="0" aria-label="Hours" />
+          <button class="spin-btn" data-target="hours" data-dir="down">▼</button>
+          <span class="unit">hr</span>
+        </div>
+        <div class="spinner-wrap">
+          <button class="spin-btn" data-target="minutes" data-dir="up">▲</button>
+          <input type="number" id="minutes" min="0" max="59" value="0" aria-label="Minutes" />
+          <button class="spin-btn" data-target="minutes" data-dir="down">▼</button>
+          <span class="unit">min</span>
+        </div>
+      </div>
+    </section>
+
+    <button id="calculateBtn" class="calculate-btn">Calculate ➜</button>
+
+    <section class="result" id="result" hidden>
+      <span class="result-label">Result time</span>
+      <span class="result-time" id="resultTime"></span>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
