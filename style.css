@@ -3,35 +3,30 @@
   position: fixed;
   top: 1.25rem;
   right: 1.25rem;
-  display: flex;
-  gap: 0.35rem;
   z-index: 100;
 }
 
-.lang-btn {
-  padding: 0.3rem 0.65rem;
+.lang-switcher select {
+  padding: 0.35rem 0.75rem;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0.55rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
   font-family: inherit;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  outline: none;
+  color-scheme: dark;
+  transition: background 0.15s, border-color 0.15s;
 }
 
-.lang-btn:hover {
+.lang-switcher select:hover,
+.lang-switcher select:focus {
   background: rgba(52, 211, 153, 0.12);
+  border-color: rgba(52, 211, 153, 0.35);
   color: #34d399;
-  border-color: rgba(52, 211, 153, 0.25);
-}
-
-.lang-btn.active {
-  background: rgba(52, 211, 153, 0.18);
-  color: #34d399;
-  border-color: rgba(52, 211, 153, 0.4);
 }
 
 *, *::before, *::after {

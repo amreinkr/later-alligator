@@ -47,16 +47,11 @@ function setLanguage(lang) {
     if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
   });
 
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-
   document.documentElement.lang = lang;
 }
 
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
-});
+const langSelect = document.getElementById('langSelect');
+langSelect.addEventListener('change', () => setLanguage(langSelect.value));
 
 const originDateInput = document.getElementById('originDate');
 const originInput     = document.getElementById('originTime');
