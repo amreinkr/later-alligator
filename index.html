@@ -31,6 +31,12 @@
       <label>Add time</label>
       <div class="add-time-inputs">
         <div class="spinner-wrap">
+          <button class="spin-btn" data-target="years" data-dir="up">▲</button>
+          <input type="number" id="years" min="0" max="9999" value="0" aria-label="Years" />
+          <button class="spin-btn" data-target="years" data-dir="down">▼</button>
+          <span class="unit">yr</span>
+        </div>
+        <div class="spinner-wrap">
           <button class="spin-btn" data-target="days" data-dir="up">▲</button>
           <input type="number" id="days" min="0" max="9999" value="0" aria-label="Days" />
           <button class="spin-btn" data-target="days" data-dir="down">▼</button>

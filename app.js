@@ -2,6 +2,7 @@
 
 const originDateInput = document.getElementById('originDate');
 const originInput     = document.getElementById('originTime');
+const yearsInput      = document.getElementById('years');
 const daysInput       = document.getElementById('days');
 const hoursInput      = document.getElementById('hours');
 const minutesInput    = document.getElementById('minutes');
@@ -32,6 +33,10 @@ minutesInput.addEventListener('change', () => {
   minutesInput.value = val;
 });
 
+yearsInput.addEventListener('change', () => {
+  yearsInput.value = Math.max(0, parseInt(yearsInput.value, 10) || 0);
+});
+
 daysInput.addEventListener('change', () => {
   let val = parseInt(daysInput.value, 10) || 0;
   daysInput.value = Math.max(0, val);
@@ -54,11 +59,15 @@ function calculate() {
 
   const origin = new Date(year, month - 1, day, hour, minute, 0, 0);
 
+  const addYears   = parseInt(yearsInput.value, 10)    || 0;
   const addDays    = parseInt(daysInput.value, 10)    || 0;
   const addHours   = parseInt(hoursInput.value, 10)   || 0;
   const addMinutes = parseInt(minutesInput.value, 10) || 0;
 
-  const result = new Date(origin.getTime() + (addDays * 1440 + addHours * 60 + addMinutes) * 60 * 1000);
+  // Add years by advancing the calendar year, then add remaining time
+  const afterYears = new Date(origin);
+  afterYears.setFullYear(afterYears.getFullYear() + addYears);
+  const result = new Date(afterYears.getTime() + (addDays * 1440 + addHours * 60 + addMinutes) * 60 * 1000);
 
   resultTime.textContent = formatTime(result);
   resultDate.textContent = formatDate(result);
