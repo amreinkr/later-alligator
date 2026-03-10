@@ -10,17 +10,22 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
+    <button class="lang-btn" data-lang="es" aria-label="Cambiar a español">ES</button>
+  </div>
+
   <div class="card">
     <header>
       <span class="gator">🐊</span>
       <h1>Later Alligator</h1>
-      <p class="tagline">Add time to any start time — see you later!</p>
+      <p class="tagline" data-i18n="tagline">Add time to any start time — see you later!</p>
     </header>
 
     <div class="divider"></div>
 
     <section class="input-group">
-      <label>Start date &amp; time</label>
+      <label data-i18n="startLabel">Start date &amp; time</label>
       <div class="datetime-inputs">
         <input type="date" id="originDate" />
         <input type="time" id="originTime" value="12:00" />
@@ -28,39 +33,39 @@
     </section>
 
     <section class="input-group add-time">
-      <label>Add time</label>
+      <label data-i18n="addTimeLabel">Add time</label>
       <div class="add-time-inputs">
         <div class="spinner-wrap">
           <button class="spin-btn" data-target="years" data-dir="up">▲</button>
-          <input type="number" id="years" min="0" max="9999" value="0" aria-label="Years" />
+          <input type="number" id="years" min="0" max="9999" value="0" aria-label="Years" data-i18n-aria="yearsAria" />
           <button class="spin-btn" data-target="years" data-dir="down">▼</button>
-          <span class="unit">yr</span>
+          <span class="unit" data-i18n="unitYr">yr</span>
         </div>
         <div class="spinner-wrap">
           <button class="spin-btn" data-target="days" data-dir="up">▲</button>
-          <input type="number" id="days" min="0" max="9999" value="0" aria-label="Days" />
+          <input type="number" id="days" min="0" max="9999" value="0" aria-label="Days" data-i18n-aria="daysAria" />
           <button class="spin-btn" data-target="days" data-dir="down">▼</button>
-          <span class="unit">day</span>
+          <span class="unit" data-i18n="unitDay">day</span>
         </div>
         <div class="spinner-wrap">
           <button class="spin-btn" data-target="hours" data-dir="up">▲</button>
-          <input type="number" id="hours" min="0" max="999" value="0" aria-label="Hours" />
+          <input type="number" id="hours" min="0" max="999" value="0" aria-label="Hours" data-i18n-aria="hoursAria" />
           <button class="spin-btn" data-target="hours" data-dir="down">▼</button>
-          <span class="unit">hr</span>
+          <span class="unit" data-i18n="unitHr">hr</span>
         </div>
         <div class="spinner-wrap">
           <button class="spin-btn" data-target="minutes" data-dir="up">▲</button>
-          <input type="number" id="minutes" min="0" max="59" value="0" aria-label="Minutes" />
+          <input type="number" id="minutes" min="0" max="59" value="0" aria-label="Minutes" data-i18n-aria="minutesAria" />
           <button class="spin-btn" data-target="minutes" data-dir="down">▼</button>
-          <span class="unit">min</span>
+          <span class="unit" data-i18n="unitMin">min</span>
         </div>
       </div>
     </section>
 
-    <button id="calculateBtn" class="calculate-btn">Calculate ➜</button>
+    <button id="calculateBtn" class="calculate-btn" data-i18n="calculateBtn">Calculate ➜</button>
 
     <section class="result" id="result" hidden>
-      <span class="result-label">Result</span>
+      <span class="result-label" data-i18n="resultLabel">Result</span>
       <span class="result-time" id="resultTime"></span>
       <span class="result-date" id="resultDate"></span>
     </section>
