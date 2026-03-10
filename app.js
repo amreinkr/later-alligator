@@ -1,11 +1,16 @@
 'use strict';
 
-const originInput   = document.getElementById('originTime');
-const hoursInput    = document.getElementById('hours');
-const minutesInput  = document.getElementById('minutes');
-const calculateBtn  = document.getElementById('calculateBtn');
-const resultSection = document.getElementById('result');
-const resultTime    = document.getElementById('resultTime');
+const originDateInput = document.getElementById('originDate');
+const originInput     = document.getElementById('originTime');
+const hoursInput      = document.getElementById('hours');
+const minutesInput    = document.getElementById('minutes');
+const calculateBtn    = document.getElementById('calculateBtn');
+const resultSection   = document.getElementById('result');
+const resultTime      = document.getElementById('resultTime');
+const resultDate      = document.getElementById('resultDate');
+
+// Default origin date to today
+originDateInput.value = toDateInputValue(new Date());
 
 // Spinner buttons (+/- for hours and minutes)
 document.querySelectorAll('.spin-btn').forEach(btn => {
@@ -34,27 +39,46 @@ hoursInput.addEventListener('change', () => {
 calculateBtn.addEventListener('click', calculate);
 
 function calculate() {
-  const [originHours, originMinutes] = originInput.value.split(':').map(Number);
+  const dateVal = originDateInput.value; // "YYYY-MM-DD"
+  const timeVal = originInput.value;     // "HH:MM"
+
+  // Parse origin as a local date/time
+  const [year, month, day] = dateVal.split('-').map(Number);
+  const [hour, minute]     = timeVal.split(':').map(Number);
+
+  const origin = new Date(year, month - 1, day, hour, minute, 0, 0);
+
   const addHours   = parseInt(hoursInput.value, 10)   || 0;
   const addMinutes = parseInt(minutesInput.value, 10) || 0;
 
-  const totalMinutes = originHours * 60 + originMinutes + addHours * 60 + addMinutes;
+  const result = new Date(origin.getTime() + (addHours * 60 + addMinutes) * 60 * 1000);
 
-  // Wrap around 24 hours
-  const resultHours   = Math.floor(totalMinutes / 60) % 24;
-  const resultMins    = totalMinutes % 60;
-
-  resultTime.textContent = formatTime(resultHours, resultMins);
+  resultTime.textContent = formatTime(result);
+  resultDate.textContent = formatDate(result);
 
   resultSection.hidden = false;
 
   // Re-trigger animation on recalculate
-  resultSection.classList.remove('pop');
+  resultSection.style.animation = 'none';
   void resultSection.offsetWidth;
+  resultSection.style.animation = '';
 }
 
-function formatTime(h, m) {
+function formatTime(date) {
+  const h      = date.getHours();
+  const m      = date.getMinutes();
   const period = h >= 12 ? 'PM' : 'AM';
   const hour12 = h % 12 || 12;
   return `${hour12}:${String(m).padStart(2, '0')} ${period}`;
+}
+
+function formatDate(date) {
+  return date.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function toDateInputValue(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
 }

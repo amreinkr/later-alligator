@@ -64,7 +64,7 @@ label {
 }
 
 input[type="time"] {
-  width: 100%;
+  flex: 1;
   padding: 0.65rem 0.9rem;
   border: 2px solid #c8e6c8;
   border-radius: 0.75rem;
@@ -78,6 +78,30 @@ input[type="time"] {
 }
 
 input[type="time"]:focus {
+  border-color: #2d7a2d;
+}
+
+.datetime-inputs {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+input[type="date"] {
+  flex: 1;
+  padding: 0.65rem 0.9rem;
+  border: 2px solid #c8e6c8;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  background: #f4faf4;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+input[type="date"]:focus {
   border-color: #2d7a2d;
 }
 
@@ -192,6 +216,15 @@ input[type="time"]:focus {
   font-weight: 800;
   color: #1a4a1a;
   letter-spacing: -1px;
+  display: block;
+}
+
+.result-date {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a7a4a;
+  margin-top: 0.2rem;
 }
 
 @keyframes pop-in {

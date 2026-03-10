@@ -15,8 +15,11 @@
     </header>
 
     <section class="input-group">
-      <label for="originTime">Start time</label>
-      <input type="time" id="originTime" value="12:00" />
+      <label>Start date &amp; time</label>
+      <div class="datetime-inputs">
+        <input type="date" id="originDate" />
+        <input type="time" id="originTime" value="12:00" />
+      </div>
     </section>
 
     <section class="input-group add-time">
@@ -40,8 +43,9 @@
     <button id="calculateBtn" class="calculate-btn">Calculate ➜</button>
 
     <section class="result" id="result" hidden>
-      <span class="result-label">Result time</span>
+      <span class="result-label">Result</span>
       <span class="result-time" id="resultTime"></span>
+      <span class="result-date" id="resultDate"></span>
     </section>
   </div>
 
